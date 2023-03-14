@@ -1,23 +1,22 @@
 import React, {useState} from 'react';
 import styles from './OnOf.module.css'
 
-// type OnOffPropsType = {
-//     on: boolean
-// }
+type OnOffPropsType = {
+    onOfState: boolean
+    setOnOfState: (state: boolean) => void
+}
 
-const OnOf = () => {
-
-    let [on, setOn] = useState<boolean>(true)
-
-    const onClickHandler =(event: React.MouseEvent<HTMLDivElement>)=> {
-        setOn(event.currentTarget.innerHTML === 'On' ? true : false)
-    }
+const OnOf: React.FC<OnOffPropsType> = ({onOfState, setOnOfState}) => {
 
     return (
         <div className={styles.wrapper}>
-            <div id='on' onClick={onClickHandler} className={`${styles.btn} ${on && styles.on}`}>On</div>
-            <div id='off' onClick={onClickHandler} className={`${styles.btn} ${!on && styles.off}`}>Off</div>
-            <div className={`${styles.lamp} ${on ? styles.on : styles.off}`}></div>
+            <div onClick={() => {setOnOfState(true)}}
+                 className={`${styles.btn} ${onOfState && styles.on}`}>
+                On</div>
+            <div onClick={() => {setOnOfState(false)}}
+                 className={`${styles.btn} ${!onOfState && styles.off}`}>
+                Off</div>
+            <div className={`${styles.lamp} ${onOfState ? styles.on : styles.off}`}></div>
         </div>
     );
 };

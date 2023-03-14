@@ -1,32 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Accordion from "./components/Accordion/Accordion";
-import {Rating} from "./components/Rating/Rating";
-import OnOf from "./components/OnOf/OnOf";
+import {Rating, RatingValueType} from "./components/Rating/Rating";
 import {UncontrolledAccordion} from "./components/UncontrolledAccordion/UncontrolledAccordion";
 import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRating";
+import UncontrolledOnOf from "./components/UncontrolledOnOf/UncontrolledOnOf";
+import OnOf from "./components/OnOf/OnOf";
+
 
 function App() {
+
+    let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
+
+    let [accordionState, setAccordionState] = useState<boolean>(false)
+
+    let [onOfState, setOnOfState] = useState<boolean>(false)
+
     return (
         <div>
             <PageTitle title={"This is APP Component"}/>
             <PageTitle title={"My friends"}/>
             Article 1
-            <Rating value={3}/>
-            <Accordion titleValue={"Menu"} collapsed={true}/>
-            <Accordion titleValue={"Users"} collapsed={false}/>
-            Article 2
-            <Rating value={0}/>
-            <Rating value={1}/>
-            <Rating value={2}/>
-            <Rating value={3}/>
-            <Rating value={4}/>
-            <Rating value={5}/>
-            <hr/>
-            <h1>UseState</h1>
-            <OnOf/>
-            <UncontrolledAccordion titleValue={'Menu'}/>
-            <UncontrolledRating/>
+            <Rating value={ratingValue} setRatingValue={setRatingValue}/>
+            <Accordion titleValue={"Menu"}
+                       accordionState={accordionState}
+                       setAccordionState={setAccordionState}/>
+            {/*<Accordion titleValue={"Users"} collapsed={false}/>*/}
+            {/*Article 2*/}
+            {/*<Rating value={0}/>*/}
+            {/*<hr/>*/}
+            {/*<h1>UseState</h1>*/}
+            <UncontrolledOnOf/>
+            <OnOf onOfState={onOfState} setOnOfState={setOnOfState}/>
+            {/*<UncontrolledAccordion titleValue={'Menu'}/>*/}
+            {/*<UncontrolledRating/>*/}
         </div>
     );
 }
