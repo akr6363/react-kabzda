@@ -3,19 +3,15 @@ import React from "react";
 type AccordionPropsType = {
     titleValue: string
     accordionState: boolean
-    setAccordionState: (state: boolean) => void
+    setAccordionState: () => void
 }
 
 function Accordion(props: AccordionPropsType) {
 
-    const setAccordionStateHandler = () => {
-        props.setAccordionState(!props.accordionState)
-    }
-
     return (
         <div>
             <AccordionTitle title={props.titleValue}
-                            setAccordionState={setAccordionStateHandler}/>
+                            setAccordionState={props.setAccordionState}/>
             {props.accordionState && <AccordionBody/>}
         </div>
     )
