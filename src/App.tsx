@@ -24,7 +24,7 @@ function App() {
             <Rating value={ratingValue} setRatingValue={setRatingValue}/>
             <Accordion titleValue={"Menu"}
                        accordionState={accordionState}
-                       setAccordionState={() => {setAccordionState(!accordionState)}}/>
+                       setAccordionState={setAccordionState}/>
             {/*<Accordion titleValue={"Users"} collapsed={false}/>*/}
             {/*Article 2*/}
             {/*<Rating value={0}/>*/}
