@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import styles from './OnOf.module.css'
 
-type OnOffPropsType = {
+export type OnOffPropsType = {
     onOfState: boolean
     setOnOfState: (state: boolean) => void
 }
 
-const OnOf: React.FC<OnOffPropsType> = ({onOfState, setOnOfState}) => {
+export const OnOf: React.FC<OnOffPropsType> = ({onOfState, setOnOfState}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -21,4 +21,4 @@ const OnOf: React.FC<OnOffPropsType> = ({onOfState, setOnOfState}) => {
     );
 };
 
-export default OnOf;
+
