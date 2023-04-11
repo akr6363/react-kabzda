@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
-import Accordion from "./components/Accordion/Accordion";
+import Accordion, {ItemType} from "./components/Accordion/Accordion";
 import {Rating, RatingValueType} from "./components/Rating/Rating";
 import {UncontrolledAccordion} from "./components/UncontrolledAccordion/UncontrolledAccordion";
 import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRating";
 import UncontrolledOnOf from "./components/UncontrolledOnOf/UncontrolledOnOf";
 import {OnOf} from "./components/OnOf/OnOf";
-
+import {Select} from "./components/Select/Select";
 
 
 function App() {
@@ -16,6 +16,18 @@ function App() {
     let [accordionState, setAccordionState] = useState<boolean>(false)
 
     let [onOfState, setOnOfState] = useState<boolean>(false)
+    const usersArr: ItemType[] = [
+        {title: 'Dima', value: 1},
+        {title: 'Valera', value: 2},
+        {title: 'Anya', value: 3},
+        {title: 'Vovan', value: 4},
+    ]
+
+    const [selectValue, setSelectValue] = useState('Name')
+    const setSelectValueHandler = (value: string) => {
+        setSelectValue(value)
+    }
+
 
     return (
         <div>
@@ -25,7 +37,10 @@ function App() {
             <Rating value={ratingValue} setRatingValue={setRatingValue}/>
             <Accordion titleValue={"Menu"}
                        accordionState={accordionState}
-                       setAccordionState={setAccordionState}/>
+                       setAccordionState={setAccordionState}
+                       items={usersArr}
+                       onClick={(value) => alert(value)}
+            />
             {/*<Accordion titleValue={"Users"} collapsed={false}/>*/}
             {/*Article 2*/}
             {/*<Rating value={0}/>*/}
@@ -35,6 +50,9 @@ function App() {
             <OnOf onOfState={onOfState} setOnOfState={setOnOfState}/>
             {/*<UncontrolledAccordion titleValue={'Menu'}/>*/}
             {/*<UncontrolledRating/>*/}
+            <Select items={usersArr}
+                    value={selectValue}
+                    onChange={setSelectValueHandler}/>
         </div>
     );
 }
