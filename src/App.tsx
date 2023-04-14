@@ -7,6 +7,7 @@ import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRa
 import UncontrolledOnOf from "./components/UncontrolledOnOf/UncontrolledOnOf";
 import {OnOf} from "./components/OnOf/OnOf";
 import {Select} from "./components/Select/Select";
+import {Example1} from "./ReactMemo";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                     onChange={setSelectValueHandler}/>
             <h3>dfdff</h3>
             <UncontrolledAccordion titleValue={'sdsd'}/>
+            <Example1/>
         </div>
     );
 }
