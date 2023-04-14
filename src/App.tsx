@@ -54,6 +54,7 @@ function App() {
                     value={selectValue}
                     onChange={setSelectValueHandler}/>
             <h3>dfdff</h3>
+            <UncontrolledAccordion titleValue={'sdsd'}/>
         </div>
     );
 }
@@ -68,3 +69,5 @@ function PageTitle(props: PageTitlePropsType) {
 
 
 export default App;
+
+
