@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 
 export type ItemType = {
@@ -13,39 +13,79 @@ type SelectPropsType = {
 }
 
 export const Select = (props: SelectPropsType) => {
-    const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
+    const [active, setActive] = useState<boolean>(false)
+    const [hoveredElementValue, setHoveredElementValue] = useState<number>(props.value)
+
+    // useEffect(() => {
+    //     props.onChange(hoveredElementValue)
+    // }, [hoveredElementValue]);
+
+    useEffect(() => {
+        setHoveredElementValue(props.value)
+    }, [props.value]);
+
+
+    const selectedValue = props.items.find(el => el.value === props.value)
 
     const items = props.items.map((el, index) => {
         const onClickHandler = () => {
-            props.onChange(el.title)
-            setIsCollapsed(true)
+            props.onChange(el.value)
+            setActive(false)
         }
+
+        const onMouseEnterHandler = () => {
+            setHoveredElementValue(el.value)
+        }
+
         return (
-            <Option key={index} onClick={onClickHandler}>{el.title}</Option>
+            <Option key={index}
+                    onMouseEnter={onMouseEnterHandler}
+                    onClick={onClickHandler}
+                    className={hoveredElementValue === el.value ? 'selected' : ''}>
+                {el.title}
+            </Option>
         )
     })
+
+    const onKeyUpHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'ArrowDown') {
+            if (hoveredElementValue !== props.items.length) {
+                props.onChange(hoveredElementValue + 1)
+                // setHoveredElementValue(hoveredElementValue + 1)
+            }
+        }
+        if (e.key === 'ArrowUp') {
+            if (hoveredElementValue !== 1) {
+                props.onChange(hoveredElementValue - 1)
+                // setHoveredElementValue(hoveredElementValue - 1)
+            }
+        }
+        if (e.key === 'Enter' || e.key === 'Escape') {
+            setActive(false)
+        }
+    }
+
     return (
-        <SelectBody>
+        <SelectBody className={active ? 'active' : ''}
+                    tabIndex={0}
+                    onKeyUp={onKeyUpHandler}
+                    onBlur={() => setActive(false)}>
             <SelectHead
                 onClick={() => {
-                    setIsCollapsed(!isCollapsed)
+                    setActive(!active)
                 }}
-                // tabIndex={1}
-                // onBlur={() => {
-                //     setIsCollapsed(!isCollapsed)
-                // }}
-                >
-                {props.value}
+            >
+                {selectedValue && selectedValue.title}
             </SelectHead>
-            <OptionContainer>
-            {!isCollapsed && items}
+            <OptionContainer className={'options'}>
+                {items}
             </OptionContainer>
         </SelectBody>
     );
 };
 
 
-const SelectHead = styled.div `
+const SelectHead = styled.div`
   border-bottom: 1px solid black;
   padding: 7px 20px 10px 2px;
   position: relative;
@@ -58,22 +98,53 @@ const SelectHead = styled.div `
     font-size: 10px;
   }
 
-  &:hover {
-    background-color: rgba(134, 134, 134, 0.4);
+  //
+  //&:hover {
+  //  background-color: rgba(134, 134, 134, 0.4);
+  //}
+`
+const Parent = styled.div`
+  /* стили для родительского элемента */
+
+  &.active {
+    /* стили для родительского элемента при добавлении класса "active" */
+
+    > p {
+      display: block;
+      /* стили для вложенного элемента при добавлении класса "active" у родительского элемента */
+    }
   }
 `
 
-const SelectBody = styled.div `
+const SelectBody = styled.div`
+  width: 70px;
   margin-top: 20px;
   display: inline-block;
-`
-const OptionContainer = styled.div `
-    border: 1px solid #000;
-  border-top: none;
+
+  &.active {
+    display: block;
+
+    > .options {
+      display: block;
+
+    }
+  }
 `
 
-const Option = styled.div `
-  &:hover {
-    background-color: rgba(134, 134, 134, 0.4);
+const OptionContainer = styled.div`
+  background-color: #fff;
+  position: absolute;
+  border: 1px solid #000;
+  border-top: none;
+  width: 70px;
+  display: none;
+`
+
+const Option = styled.div`
+  //&:hover {
+  //  background-color: rgba(134, 134, 134, 0.4);
+  //}
+  &.selected {
+    background-color: #66bf3c;
   }
 `

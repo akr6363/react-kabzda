@@ -23,8 +23,8 @@ function App() {
         {title: 'Vovan', value: 4},
     ]
 
-    const [selectValue, setSelectValue] = useState('Name')
-    const setSelectValueHandler = (value: string) => {
+    const [selectValue, setSelectValue] = useState<number | null>(null)
+    const setSelectValueHandler = (value: number) => {
         setSelectValue(value)
     }
 
@@ -53,6 +53,7 @@ function App() {
             <Select items={usersArr}
                     value={selectValue}
                     onChange={setSelectValueHandler}/>
+            <h3>dfdff</h3>
         </div>
     );
 }
