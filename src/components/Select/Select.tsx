@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+import {citiesType, citiesTypeWithValue} from "../../UseMemo.stories";
 
 export type ItemType = {
     title: string
@@ -9,10 +10,11 @@ export type ItemType = {
 type SelectPropsType = {
     value: any
     onChange: (value: any) => void
-    items: ItemType[]
+    items: ItemType[] | citiesTypeWithValue[]
 }
 
 export const Select = (props: SelectPropsType) => {
+    console.log('SELECT')
     const [active, setActive] = useState<boolean>(false)
     const [hoveredElementValue, setHoveredElementValue] = useState<number>(props.value)
 
@@ -50,7 +52,7 @@ export const Select = (props: SelectPropsType) => {
     const onKeyUpHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'ArrowDown') {
             if (hoveredElementValue !== props.items.length) {
-                props.onChange(hoveredElementValue + 1)
+                 props.onChange(hoveredElementValue + 1)
                 // setHoveredElementValue(hoveredElementValue + 1)
             }
         }
@@ -119,7 +121,7 @@ const Parent = styled.div`
 const SelectBody = styled.div`
   width: 70px;
   margin-top: 20px;
-  display: inline-block;
+  display: block;
 
   &.active {
     display: block;

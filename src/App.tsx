@@ -8,6 +8,7 @@ import UncontrolledOnOf from "./components/UncontrolledOnOf/UncontrolledOnOf";
 import {OnOf} from "./components/OnOf/OnOf";
 import {Select} from "./components/Select/Select";
 import {Example1} from "./ReactMemo";
+// import {DifficultCountingExample, HelpsToReactMemo} from "./UseMemo";
 
 
 function App() {
@@ -57,6 +58,8 @@ function App() {
             <h3>dfdff</h3>
             <UncontrolledAccordion titleValue={'sdsd'}/>
             <Example1/>
+            {/*<DifficultCountingExample/>*/}
+            {/*<HelpsToReactMemo/>*/}
         </div>
     );
 }
