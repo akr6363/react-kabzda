@@ -51,6 +51,8 @@ export const DifficultCountingExample = () => {
     )
 }
 
+//----------------------------------------------------------------------------------------------------------------
+
 const UsersSecret = (props: { users: Array<string> }) => {
     console.log('users')
     return <div>
@@ -86,6 +88,58 @@ export const HelpsToReactMemo = () => {
     )
 }
 
+//----------------------------------------------------------------------------------------------------------------
+
+type BookSecretPropsType = {
+    books: Array<string>
+    addBooks(): void
+}
+
+const BookSecret = (props: BookSecretPropsType) => {
+    console.log('books secret')
+    return <div>
+        <button onClick={props.addBooks}>add user</button>
+        {props.books.map((u, i) => <div key={i}>{u}</div>)}
+    </div>
+}
+
+const Book = React.memo(BookSecret)
+
+export const LikeUseCallback = () => {
+    console.log('LikeUseCallback')
+    const [counter, setCounter] = useState(0)
+    const [books, setBooks] = useState(['React', 'Node', 'Css'])
+
+    const newArray = useMemo(() => {
+        return books.filter(u => u.toLowerCase().indexOf('a') > -1)
+    }, [books])
+
+
+    const memoAddBooks = useMemo(() => {
+        return () => {
+            const newBooks = [...books, 'Angular' + new Date().getTime()]
+            setBooks(newBooks)
+        }
+    }, [books])
+
+    const memoAddBooks2 = useCallback(() => {
+        const newBooks = [...books, 'Angular' + new Date().getTime()]
+        setBooks(newBooks)
+    }, [books])
+
+
+    return (
+        <>
+            <button onClick={() => {
+                setCounter(counter + 1)
+            }}>+
+            </button>
+            {counter}
+            <Book books={newArray} addBooks={memoAddBooks2}/>
+        </>
+    )
+}
+
 export type citiesType = {
     title: string
     country: string
@@ -104,7 +158,6 @@ export const HelpsToSelect = () => {
     const [counter, setCounter] = useState(0)
 
 
-
     const [cities, setUsers] = useState<citiesType[]>([
         {title: 'Moscow', country: 'Russia', population: 100010},
         {title: 'Perm', country: 'Russia', population: 776},
@@ -116,7 +169,6 @@ export const HelpsToSelect = () => {
         {title: 'Vitebsk', country: 'Belarus', population: 2131},
         {title: 'Brest', country: 'Belarus', population: 343433333},
     ])
-
 
 
     const [selectValue1, setSelectValue1] = useState<number>(1)
