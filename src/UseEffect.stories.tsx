@@ -69,30 +69,43 @@ export const SetTimeoutExample = () => {
     )
 }
 
-
-//22:13:11
-
-// export const Clock = () => {
-//     const [time, setTime] = useState(new Date(Date.now()))
-//     console.log(time)
 //
-//     const getTime = (date: Date) => {
-//         const hours = date.getHours().toString().padStart(2, '0');
-//         const minutes = date.getMinutes().toString().padStart(2, '0');
-//         const seconds = date.getSeconds().toString().padStart(2, '0');
-//         return `${hours}:${minutes}:${seconds}`
-//     }
-//     useEffect(() => {
-//         setInterval(()=> {
-//             setTime(new Date(Date.now()))
-//         }, 1000)
+// export const KeyTrackerExample = () => {
+//     const [text, setText] = useState('')
+//
+//     useEffect(()=> {
+//         const handler = (e: KeyboardEvent) => {
+//             console.log(e.key)
+//             setText((state) => state + e.key)
+//         }
+//         window.addEventListener('keypress', handler)
+//         return () => {
+//             window.removeEventListener('keypress', handler)
+//         }
 //     }, [])
-//
-//     return (
-//         <>
-//             {getTime(time)}
-//         </>
-//     )
+//     return <>
+//         typed text : {text}
+//     </>
 // }
+
+
+export const KeyTrackerExample = () => {
+    const [text, setText] = useState('')
+
+    useEffect(()=> {
+        const handler = (e: KeyboardEvent) => {
+            console.log(e.key)
+            setText(text + e.key)
+        }
+        window.addEventListener('keypress', handler)
+        return () => {
+            window.removeEventListener('keypress', handler)
+        }
+    }, [text])
+
+    return <>
+        typed text : {text}
+    </>
+}
 
 export default meta;
