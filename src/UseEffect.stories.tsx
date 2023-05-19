@@ -72,27 +72,27 @@ export const SetTimeoutExample = () => {
 
 //22:13:11
 
-export const Clock = () => {
-    const [time, setTime] = useState(new Date(Date.now()))
-    console.log(time)
-
-    const getTime = (date: Date) => {
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        const seconds = date.getSeconds().toString().padStart(2, '0');
-        return `${hours}:${minutes}:${seconds}`
-    }
-    useEffect(() => {
-        setInterval(()=> {
-            setTime(new Date(Date.now()))
-        }, 1000)
-    }, [])
-
-    return (
-        <>
-            {getTime(time)}
-        </>
-    )
-}
+// export const Clock = () => {
+//     const [time, setTime] = useState(new Date(Date.now()))
+//     console.log(time)
+//
+//     const getTime = (date: Date) => {
+//         const hours = date.getHours().toString().padStart(2, '0');
+//         const minutes = date.getMinutes().toString().padStart(2, '0');
+//         const seconds = date.getSeconds().toString().padStart(2, '0');
+//         return `${hours}:${minutes}:${seconds}`
+//     }
+//     useEffect(() => {
+//         setInterval(()=> {
+//             setTime(new Date(Date.now()))
+//         }, 1000)
+//     }, [])
+//
+//     return (
+//         <>
+//             {getTime(time)}
+//         </>
+//     )
+// }
 
 export default meta;

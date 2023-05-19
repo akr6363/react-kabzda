@@ -1,0 +1,30 @@
+
+.analog_clock {
+    width: 100px;
+    height: 100px;
+    border: solid 1px #000;
+    border-radius: 50%;
+    position: relative;
+    background: #fff;
+}
+.analog_clock .dial {
+    position: absolute;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    transform-origin: bottom left;
+}
+.analog_clock .dial.seconds {
+
+    border-left: solid 1px green;
+}
+.analog_clock .dial.minutes {
+    border-left: solid 1px #cc0000;
+}
+.analog_clock .dial.hours {
+    width: 35px;
+    height: 35px;
+    top: 15px;
+    left: 51%;
+    border-left: solid 3px #000;
+}

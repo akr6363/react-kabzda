@@ -1,6 +1,3 @@
-body {
-    padding: 20px;
-}
 
 .clock {
     position: relative;
@@ -12,8 +9,10 @@ body {
 
 .hand {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 0;
+    top: 0;
+    /*left: 50%;*/
+    /*top: 50%;*/
     transform-origin: bottom center;
 }
 
@@ -23,19 +22,19 @@ body {
     background: #000;
 }
 
-.minute-hand {
+.minute_hand {
     width: 4px;
     height: 80px;
     background: #000;
 }
 
-.second-hand {
+.second_hand {
     width: 2px;
     height: 100px;
     background: #f00;
 }
 
-.center-dot {
+.center_dot {
     position: absolute;
     left: 50%;
     top: 50%;
